@@ -2,13 +2,13 @@ package com.leboncoin.fizzbuzz.controller;
 
 import com.leboncoin.fizzbuzz.model.FizzBuzz;
 import com.leboncoin.fizzbuzz.service.FizzbuzzService;
-import com.leboncoin.fizzbuzz.util.Util;
-import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -26,8 +26,13 @@ public class FizzbuzzController {
                                                    @RequestParam(value = "str2", required = false) String str2,
                                                    @RequestParam(value = "int1", required = false) Integer number1 ,
                                                    @RequestParam(value = "int2", required = false) Integer number2 ,
-                                                   @RequestParam(value = "limit",  required = false) Integer limit){
+                                                   @RequestParam(value = "limit",  required = false)  Integer limit){
 
+        if(limit < 0){
+            List<String> error = new ArrayList<String>();
+            error.add("Error limit negative");
+            return new ResponseEntity(error, HttpStatus.BAD_REQUEST);
+        }
         if(str1 == null && str2 ==null && number2 ==null && number1 ==null && limit ==null){
             return popularFizzbuzzList();
         }
