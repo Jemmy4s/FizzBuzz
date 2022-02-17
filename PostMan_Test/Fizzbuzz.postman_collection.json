@@ -1,0 +1,416 @@
+{
+	"info": {
+		"_postman_id": "05b78fe2-859e-4c44-9626-4e0bf9de5da0",
+		"name": "Fizzbuzz",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "FizzBuzzAlltime",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"fizzuzz\");\r",
+							"\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Size 10\", function () {\r",
+							"    jsonArray = JSON.parse(pm.response.text());\r",
+							"    pm.expect(jsonArray.length).to.eql(10);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{env}}/fizzbuzz?int1=1&int2=1&str1=fizz&limit=10&str2=buzz",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"fizzbuzz"
+					],
+					"query": [
+						{
+							"key": "int1",
+							"value": "1"
+						},
+						{
+							"key": "int2",
+							"value": "1"
+						},
+						{
+							"key": "str1",
+							"value": "fizz"
+						},
+						{
+							"key": "limit",
+							"value": "10"
+						},
+						{
+							"key": "str2",
+							"value": "buzz"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Error Argument",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 403\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{env}}/fizzbuzz?int1=number&int2=other string&str1=fizz&str2=buzz&limit=10",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"fizzbuzz"
+					],
+					"query": [
+						{
+							"key": "int1",
+							"value": "number"
+						},
+						{
+							"key": "int2",
+							"value": "other string"
+						},
+						{
+							"key": "str1",
+							"value": "fizz"
+						},
+						{
+							"key": "str2",
+							"value": "buzz"
+						},
+						{
+							"key": "limit",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FizzBuzzDefaulft",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Size 100\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.length).to.eql(100);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"\") , function (){\r",
+							"    jsonArray = JSON.parse(pm.response.text());\r",
+							"    pm.expect(response[15]).to.eql(15);\r",
+							"}\r",
+							"pm.test(\"YNumber 15 : fizzbuzz\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[14]).to.eql(\"fizzbuzz\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{env}}/fizzbuzz?int1=3&int2=5&str1=fizz&limit=100&str2=buzz",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"fizzbuzz"
+					],
+					"query": [
+						{
+							"key": "int1",
+							"value": "3"
+						},
+						{
+							"key": "int2",
+							"value": "5"
+						},
+						{
+							"key": "str1",
+							"value": "fizz"
+						},
+						{
+							"key": "limit",
+							"value": "100"
+						},
+						{
+							"key": "str2",
+							"value": "buzz"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "test with 1,2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/fizzbuzz?int1=1&int2=2&str1=fizz&limit=10&str2=buzz",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"fizzbuzz"
+					],
+					"query": [
+						{
+							"key": "int1",
+							"value": "1"
+						},
+						{
+							"key": "int2",
+							"value": "2"
+						},
+						{
+							"key": "str1",
+							"value": "fizz"
+						},
+						{
+							"key": "limit",
+							"value": "10"
+						},
+						{
+							"key": "str2",
+							"value": "buzz"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test negative number",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{env}}/fizzbuzz?int1=-1&int2=-2&str1=fizz&limit=10&str2=buzz",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"fizzbuzz"
+					],
+					"query": [
+						{
+							"key": "int1",
+							"value": "-1"
+						},
+						{
+							"key": "int2",
+							"value": "-2"
+						},
+						{
+							"key": "str1",
+							"value": "fizz"
+						},
+						{
+							"key": "limit",
+							"value": "10"
+						},
+						{
+							"key": "str2",
+							"value": "buzz"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test negative limit",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/fizzbuzz?int1=2&int2=4&str1=fizz&limit=-1&str2=buzz",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"fizzbuzz"
+					],
+					"query": [
+						{
+							"key": "int1",
+							"value": "2"
+						},
+						{
+							"key": "int2",
+							"value": "4"
+						},
+						{
+							"key": "str1",
+							"value": "fizz"
+						},
+						{
+							"key": "limit",
+							"value": "-1"
+						},
+						{
+							"key": "str2",
+							"value": "buzz"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test negative limit Copy",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/fizzbuzz?int1=3&int2=5&str1=fizz&limit=10&str2=buzz",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"fizzbuzz"
+					],
+					"query": [
+						{
+							"key": "int1",
+							"value": "3"
+						},
+						{
+							"key": "int2",
+							"value": "5"
+						},
+						{
+							"key": "str1",
+							"value": "fizz"
+						},
+						{
+							"key": "limit",
+							"value": "10"
+						},
+						{
+							"key": "str2",
+							"value": "buzz"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Statistic",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/statistic",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"statistic"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "env",
+			"value": "localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "{{env}}",
+			"value": "localhost:8080",
+			"type": "string"
+		}
+	]
+}
