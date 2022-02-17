@@ -16,7 +16,7 @@ import java.util.Optional;
 public interface FizzbuzzStatisticDAO extends JpaRepository<FizzbuzzStatistic, Long>,
         JpaSpecificationExecutor<FizzbuzzStatistic>{
 
-    @Query("select fs from FizzbuzzStatistic fs ORDER BY fs.nbOcurrence desc")
+    @Query("select fs from FizzbuzzStatistic fs ORDER BY fs.nbOccurrence desc")
     List<FizzbuzzStatistic> findFirstByOderByNbOcurrence(Pageable pageable);
 
     @Query("select fs from FizzbuzzStatistic fs  where fs.fizzBuzz.id = ?1")

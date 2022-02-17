@@ -1,5 +1,6 @@
 package com.leboncoin.fizzbuzz.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,10 +16,15 @@ public class FizzBuzz{
     @GeneratedValue
     private Long id;
 
+    @JsonProperty
     Integer number1;
+    @JsonProperty
     Integer number2;
+    @JsonProperty
     String  string1;
+    @JsonProperty
     String  string2;
+    @JsonProperty
     Integer limitInt;
     private static final Integer startNumber = 1;
 

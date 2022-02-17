@@ -1,6 +1,8 @@
 package com.leboncoin.fizzbuzz.model;
 
-import lombok.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -12,14 +14,15 @@ public class FizzbuzzStatistic {
     @Id
     @GeneratedValue
     private Long id;
-    private Long nbOcurrence;
+    @JsonProperty
+    private Long nbOccurrence;
 
     @OneToOne
     @JoinColumn
     private FizzBuzz fizzBuzz;
 
-    public FizzbuzzStatistic(Long nbOcurrence, FizzBuzz fizzBuzz){
-        this.nbOcurrence = nbOcurrence;
+    public FizzbuzzStatistic(Long nbOccurrence, FizzBuzz fizzBuzz){
+        this.nbOccurrence = nbOccurrence;
         this.fizzBuzz = fizzBuzz;
     }
 
@@ -29,10 +32,12 @@ public class FizzbuzzStatistic {
     }
 
     public void addOneOccurrence(){
-        this.nbOcurrence = nbOcurrence +1L ;
+        this.nbOccurrence = nbOccurrence +1L ;
     }
 
     public FizzBuzz getFizzBuzz(){
         return fizzBuzz;
     }
+
+
 }
