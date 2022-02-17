@@ -56,15 +56,14 @@ public class FizzbuzzServiceImpl implements FizzbuzzService {
     }
 
     @Override
-    public List<Object> mostPopularFizzbuzz(){
+    public List<FizzbuzzStatistic> mostPopularFizzbuzzStatistic(){
         FizzbuzzStatistic fizzbuzzStatistic =  getMostPopularFizzbuzzID();
-        List<Object> objectsList= new ArrayList<>();
+        List<FizzbuzzStatistic> objectsList= new ArrayList<>();
         if(fizzbuzzStatistic == null){
             return objectsList;
         }
         Optional<FizzBuzz> fizzBuzz = fizzbuzzDAO.findById(fizzbuzzStatistic.getFizzBuzz().getId());
         objectsList.add(fizzbuzzStatistic);
-        objectsList.add(fizzBuzz.get());
         return objectsList;
     }
 
@@ -77,22 +76,30 @@ public class FizzbuzzServiceImpl implements FizzbuzzService {
                 .withString2(string2);
 
        FizzBuzz fizzBuzz = fizzBuzzBuilder.build();
-       FizzBuzz fizzBuzzWithId = new FizzBuzz();
-        ExampleMatcher fizzBuzzMatcher = ExampleMatcher.matching().withIgnorePaths("id");
-        Example<FizzBuzz> fizzBuzzExample = Example.of(fizzBuzz,fizzBuzzMatcher);
-       if(!fizzbuzzDAO.exists(fizzBuzzExample)) {
-            fizzBuzzWithId = fizzbuzzDAO.save(fizzBuzz);
-            fizzbuzzStatisticDAO.save(new FizzbuzzStatistic());
-        } else {
-           fizzBuzzWithId = fizzbuzzDAO.findOne(fizzBuzzExample).get();
-           Optional<FizzbuzzStatistic> optionalStatistic = fizzbuzzStatisticDAO.findFizzbuzzStatisticByFizzbuzzID(fizzBuzzWithId.getId());
-           FizzbuzzStatistic statistic= (optionalStatistic.isEmpty()) ?  new FizzbuzzStatistic(1L,fizzBuzzWithId) : optionalStatistic.get();
-           statistic.addOneOccurrence();
-           fizzbuzzStatisticDAO.save(statistic);
-        }
+       createFizzbuzz(fizzBuzz);
+
 
        return fizzBuzz.calculFizzbuzz();
     }
+    public Example<FizzBuzz> fizzBuzzExample(FizzBuzz fizzBuzz){
+        ExampleMatcher fizzBuzzMatcher = ExampleMatcher.matching().withIgnorePaths("id");
+         return Example.of(fizzBuzz,fizzBuzzMatcher);
+    }
+    public void createFizzbuzz(FizzBuzz fizzBuzz){
+        FizzBuzz fizzBuzzWithId;
+        Example<FizzBuzz> fizzBuzzExample = fizzBuzzExample(fizzBuzz);
+        Optional<FizzBuzz> optionalFizzBuzz = fizzbuzzDAO.findOne(fizzBuzzExample);
+        if(optionalFizzBuzz.isEmpty()) {
+            fizzBuzzWithId = fizzbuzzDAO.save(fizzBuzz);
+            fizzbuzzStatisticDAO.save(new FizzbuzzStatistic());
+        } else {
+            fizzBuzzWithId = optionalFizzBuzz.get();
+            Optional<FizzbuzzStatistic> optionalStatistic = fizzbuzzStatisticDAO.findFizzbuzzStatisticByFizzbuzzID(fizzBuzzWithId.getId());
+            FizzbuzzStatistic statistic= (optionalStatistic.isEmpty()) ?  new FizzbuzzStatistic(1L,fizzBuzzWithId) : optionalStatistic.get();
+            statistic.addOneOccurrence();
+            fizzbuzzStatisticDAO.save(statistic);
+        }
 
-
+    }
 }
+

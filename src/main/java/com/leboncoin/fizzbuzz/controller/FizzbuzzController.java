@@ -1,5 +1,6 @@
 package com.leboncoin.fizzbuzz.controller;
 
+import com.leboncoin.fizzbuzz.model.FizzbuzzStatistic;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,5 +19,5 @@ public interface FizzbuzzController {
     ResponseEntity<List<String>> popularFizzbuzzList();
 
     @GetMapping("/statistic")
-    ResponseEntity<List<Object>> statistic();
+    ResponseEntity<List<FizzbuzzStatistic>> statistic();
 }

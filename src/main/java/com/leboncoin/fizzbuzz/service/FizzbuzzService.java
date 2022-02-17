@@ -12,7 +12,7 @@ public interface FizzbuzzService {
 
     FizzBuzz mostPopularFizzbuzzCalcul();
 
-    List<Object> mostPopularFizzbuzz();
+    List<FizzbuzzStatistic> mostPopularFizzbuzzStatistic();
 
     List<String> createFizzBuzzList(Integer number1, Integer number2, String string1, String string2, Integer limit);
 }

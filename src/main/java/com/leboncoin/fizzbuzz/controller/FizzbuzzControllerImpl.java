@@ -1,7 +1,9 @@
 package com.leboncoin.fizzbuzz.controller;
 
 import com.leboncoin.fizzbuzz.model.FizzBuzz;
+import com.leboncoin.fizzbuzz.model.FizzbuzzStatistic;
 import com.leboncoin.fizzbuzz.service.FizzbuzzService;
+import com.leboncoin.fizzbuzz.util.Util;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,22 +37,27 @@ public class FizzbuzzControllerImpl implements FizzbuzzController {
             return new ResponseEntity(error, HttpStatus.BAD_REQUEST);
         }
         if(str1 == null && str2 ==null && number2 ==null && number1 ==null && limit ==null){
-            return popularFizzbuzzList();
+            return defaultFizzbuzz();
         }
         List<String> fizzbuzzlist = fizzbuzzService.createFizzBuzzList(number1, number2, str1, str2, limit);
         return ResponseEntity.ok(fizzbuzzlist);
     }
     @Override
-    @GetMapping("/")
+    @GetMapping("/mostPopular")
     public ResponseEntity<List<String>> popularFizzbuzzList(){
         FizzBuzz fizzBuzz = fizzbuzzService.mostPopularFizzbuzzCalcul();
+        return ResponseEntity.ok(fizzBuzz.calculFizzbuzz());
+    }
+    @GetMapping("/")
+    public ResponseEntity<List<String>> defaultFizzbuzz(){
+        FizzBuzz fizzBuzz = Util.defaultFizzBuzz();
         return ResponseEntity.ok(fizzBuzz.calculFizzbuzz());
     }
 
     @Override
     @GetMapping("/statistic")
-    public ResponseEntity<List<Object>> statistic(){
-        return ResponseEntity.ok(fizzbuzzService.mostPopularFizzbuzz());
+    public ResponseEntity<List<FizzbuzzStatistic>> statistic(){
+        return ResponseEntity.ok(fizzbuzzService.mostPopularFizzbuzzStatistic());
     }
 
 }

@@ -36,38 +36,52 @@ This endpoint should:
 - Return the parameters corresponding to the most used request, as well as the number of hits for this request
 
 
- ### Start project :
+ # Start project :
 
-You need to have docker in your machine. 
+**You need to have docker in your machine.**
 
-```
+```bash
+docker build -t fizzbuzz . 
 docker-compose -up
 ```
+**Troubleshoot :**
+Sometime the spring boot application is too rapid and the db too slow. 
+You need to restart spring boot application if you have this problem. 
 
-### End point : 
+## End point : 
 
-```
+### Calculate fizzbuzz
+
+```css
 /fizzbuzz?{int1}{int2}{str1}{str2}{limit}
 ```
-return : with paramater 
-calculate fizzbuzz
-example :
+
+*return  array of fizzbuzz*
+
+
+#### example :
+
 with parameter :` /fizzbuzz?int1=2&int=3&str1=a&str2=b&limit=6 `
+```JSON
+[ "1","a","b","a","5","b"]
 ```
-{
- "1","a","b","a","5","b"
-}
+### Default Fizzbuzz
 ```
+/ or /Fizzbuzz
 ```
-/ or /fizzbuzz without parameter : 
+### Most popular
+```
+/mostPopular 
 ```
 Most popular fizzbuzz
+
+### Statistic
 ```
 /statistic 
 ```
 Return the most popular fizzbuzz parameter with the number of requete
 exemple :
-```
+```JSON
 {
  "id" : "1" , #ID of Fizzbuszz Statistic if you want to reuse it
  "nbOccurence" : 5
@@ -80,14 +94,19 @@ exemple :
    }
 }
 ```
+###  Test
 
+You can import PostMan json in your postman to use integration test. 
 
 ### Explication [FR]: 
 
-Ps : je ne suis pas développeur spring, je suis développeur java intershop. J’ai créé un projet spring pour l’occasion car spring et le framework le plus utilisé pour du JAVA. 
+Ps : je ne suis pas développeur spring, je suis développeur java intershop. J’ai créé un projet spring pour l’occasion du test technique car spring et le framework le plus utilisé pour du JAVA. 
 
 Pour démarrer le projet j'ai crée une image docker de build temporaire. Il est juste nécessaire d'avoir docker sur ça machine. 
 
 Les choix que j'ai fait en développant : 
 
 Si les paramètres son préciser partiellement. Je modifie le fizzbuzz par défaut avec les paramètre entrée.
+Les test d'ingrétation on été fait sur postman. Il y a un déjà des requête de préparer. 
+
+J'ai fais le choix de renvoyer un array json pour les statistique car on pourrai très bien un jour vouloir augmenter le nombre de statistic par requête. 
