@@ -44,13 +44,50 @@ You need to have docker in your machine.
 docker-compose -up
 ```
 
+### End point : 
+
+```
+/fizzbuzz?{int1}{int2}{str1}{str2}{limit}
+```
+return : with paramater 
+calculate fizzbuzz
+example :
+with parameter :` /fizzbuzz?int1=2&int=3&str1=a&str2=b&limit=6 `
+```
+{
+ "1","a","b","a","5","b"
+}
+```
+```
+/ or /fizzbuzz without parameter : 
+```
+Most popular fizzbuzz
+```
+/statistic 
+```
+Return the most popular fizzbuzz parameter with the number of requete
+exemple :
+```
+{
+ "id" : "1" , #ID of Fizzbuszz Statistic if you want to reuse it
+ "nbOccurence" : 5
+ "Fizzbuzz" : { 
+   "id": 1, #ID of db object  fizzbuzz if you want to reuse it
+   "int1":3,
+   "int2":5,
+   "str1":"fizz",
+   "str2":"buzz"
+   }
+}
+```
+
+
 ### Explication [FR]: 
-Ps : je ne suis pas developpeur spring, je suis developpeur java intershop. J'ai créer un projet spring pour l'occasion car spring et le framework le plus utilisé pour du JAVA. 
-Certaine implémentation peuvent être bancal. 
 
-Pour démarrer le projet j'ai créer une image docker de build temporaire. Il est juste nécessaire d'avoir docker sur ça machine. 
+Ps : je ne suis pas développeur spring, je suis développeur java intershop. J’ai créé un projet spring pour l’occasion car spring et le framework le plus utilisé pour du JAVA. 
 
-Les choix que j'ai fais en developpant : 
+Pour démarrer le projet j'ai crée une image docker de build temporaire. Il est juste nécessaire d'avoir docker sur ça machine. 
 
-Si les paramètres son préciser qu'à moitié. Je renvoie le fizzbuzz par défaut modifier par les paramètre entrée.
-Quand les paramètres sont préciser à moitier.
+Les choix que j'ai fait en développant : 
+
+Si les paramètres son préciser partiellement. Je modifie le fizzbuzz par défaut avec les paramètre entrée.
