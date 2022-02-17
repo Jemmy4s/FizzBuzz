@@ -82,7 +82,8 @@ Most popular fizzbuzz
 Return the most popular fizzbuzz parameter with the number of requete
 exemple :
 ```JSON
-{
+[
+ {
  "id" : "1" , #ID of Fizzbuszz Statistic if you want to reuse it
  "nbOccurence" : 5
  "Fizzbuzz" : { 
@@ -92,7 +93,8 @@ exemple :
    "str1":"fizz",
    "str2":"buzz"
    }
-}
+ }
+]
 ```
 ###  Test
 
