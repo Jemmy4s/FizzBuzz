@@ -12,14 +12,11 @@ import org.springframework.test.web.servlet.MockMvc;
 
 
 @SpringBootTest
-@WebMvcTest(FizzbuzzControllerImpl.class)
 public class FizzbuzzControllerTest {
 
 
-    @MockBean
-    FizzbuzzController fbcontroller;
     @Autowired
-    MockMvc mockMvc;
+    FizzbuzzController fbcontroller;
 
 
     @Test
